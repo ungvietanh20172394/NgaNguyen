@@ -1,1 +1,163 @@
-<h1> Hello </h1>
+<!DOCTYPE html>
+<title>.slideshow demo</title>
+<style>
+  html { font: normal 1em/1.6 sans-serif; background: pink; }
+  body { margin: 0; }
+</style>
+<style>
+  .slideshow {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
+    max-width: 100vw;
+    max-height: 100vh;
+    position: relative;
+  }
+
+  .slideshow__slide {
+    position: relative;
+    display: block;
+    vertical-align: middle;
+    background: whitesmoke;
+    color: black;
+    height: 100vh;
+  }
+
+  .slideshow__slide-content {
+    transform: translateY(-50%);
+    top: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+  .is-slideshow-grid .slideshow__slide-content {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .slideshow__actions {
+    padding: 1.6rem 0;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    border-top: 1px solid orangered;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .slideshow__slide {
+    transition: height .2s ease-in-out;
+    overflow: hidden;
+  }
+
+  .slideshow__slide:not(.is-active) {
+    height: 0;
+    pointer-events: none;
+  }
+
+  .is-active ~ .slideshow__slide:not(.is-active) {
+  }
+
+  .slideshow__next {
+    cursor: pointer;
+  }
+
+  .slideshow__slide.is-active + .slideshow__actions .slideshow__next,
+  .slideshow__slide:not(.is-active) + .slideshow__actions .slideshow__done {
+    display: none;
+  }
+</style>
+
+<div role="list" class="slideshow is-slideshow-y is-slideshow-grid">
+    <div role="listitem" class="slideshow__slide">
+        <div class="slideshow__slide-content">
+            <img src="https://scontent.fhan2-1.fna.fbcdn.net/v/t1.0-9/127278874_1511522369042610_1532770149690056467_n.jpg?_nc_cat=102&ccb=2&_nc_sid=8bfeb9&_nc_ohc=-MvVXJ4qkYYAX9wFGiC&_nc_ht=scontent.fhan2-1.fna&oh=80c7be393fe25e9bb20a3c15de6dc3ca&oe=60099E13" alt="">
+        </div>
+    </div>
+    <div role="listitem" class="slideshow__slide">
+        <div class="slideshow__slide-content">
+          <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/110317046_1403654356496079_5508841685436492637_n.jpg?_nc_cat=104&ccb=2&_nc_sid=0debeb&_nc_ohc=m_-uVkRYIzQAX9v1yxJ&_nc_ht=scontent.fhan2-4.fna&oh=eb9ef21a4afdaeb3b557d99cb70dbaa4&oe=6007F923" alt="">
+        </div>
+    </div>
+    <div role="listitem" class="slideshow__slide">
+        <div class="slideshow__slide-content">
+          <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/109934325_1403653806496134_3124303654360536326_n.jpg?_nc_cat=104&ccb=2&_nc_sid=0debeb&_nc_ohc=_8CepSV1TpkAX8YHkBg&_nc_ht=scontent.fhan2-4.fna&oh=d0030539742f7a5af0c26d2d515ac415&oe=6009D9AD" alt="">
+        </div>
+    </div>
+    <div role="listitem" class="slideshow__slide">
+        <div class="slideshow__slide-content">
+          <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/109703554_1403653766496138_3197659583646559077_n.jpg?_nc_cat=110&ccb=2&_nc_sid=0debeb&_nc_ohc=7Y517M6Ab1UAX9nGRl5&_nc_ht=scontent.fhan2-4.fna&oh=c07d9ad4b66acebf73d3b76b9f35cdc8&oe=6008891F" alt="">
+        </div>
+    </div>
+    <div role="listitem" class="slideshow__slide">
+        <div class="slideshow__slide-content">
+          <img src="https://scontent.fhan2-6.fna.fbcdn.net/v/t1.0-9/116585330_1403653289829519_2184793499439337486_n.jpg?_nc_cat=100&ccb=2&_nc_sid=0debeb&_nc_ohc=QZ-MIwipXwoAX8tJZfh&_nc_ht=scontent.fhan2-6.fna&oh=6803d9c81a7d3cb87c299f4f4f371440&oe=6007E04B" alt="">
+        </div>
+    </div>
+    <nav class="slideshow__actions">
+      <a class="slideshow__next" role="button">next</a>
+      <a class="slideshow__done" role="button">done</a>
+    </nav>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+<script>
+  $(function() {
+    var $slides = $('.slideshow__slide');
+    var $slideshow = $slides.closest('.slideshow');
+    init();
+
+    function init() {
+      $slides.hasClass('is-active') || $slides.first().addClass('is-active');
+    }
+
+    function wheel(delta) {
+      if (delta > 99) go(1);
+      if (delta < -99) go(-1);
+    }
+
+    function go(n) {
+      var $active = $slides.filter('.is-active');
+      var curr = $slides.index($active);
+      var hasActive = curr != -1;
+      var next = hasActive ? curr + n : 0;
+      if (next < 0) next = 0;
+      else if (next >= $slides.length) next = -1;
+      var $next = $slides.eq(next);
+      if (hasActive) $active.not($next).removeClass('is-active');
+      $next.addClass('is-active');
+    }
+
+    function isScroll(e, key) {
+      if (key === 40 || key === 38) return e.scrollHeight > e.clientHeight;
+      if (key === 39 || key === 37) return e.scrollWidth > e.clientWidth;
+    }
+
+    $(window).on('DOMMouseScroll mousewheel wheel', _.debounce(function(e) {
+      wheel(e.originalEvent.deltaY);
+    }, 200, {
+      leading: true,
+      trailing: false
+    })).on('keydown', function(e) {
+      var key = e.keyCode;
+      if (key < 37 || key > 40) return;
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      if (isScroll(document.documentElement, key)) return;
+      e.preventDefault();
+      if (key === 40 || key === 39) go(1);
+      if (key === 38 || key === 37) go(-1);
+    });
+
+    $slideshow.find('.slideshow__next').on('click', function() {
+      go(1);
+    });
+  });
+</script>
