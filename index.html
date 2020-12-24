@@ -1,163 +1,159 @@
 <!DOCTYPE html>
-<title>.slideshow demo</title>
-<style>
-  html { font: normal 1em/1.6 sans-serif; background: pink; }
-  body { margin: 0; }
-</style>
-<style>
-  .slideshow {
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    overflow: hidden;
-    max-width: 100vw;
-    max-height: 100vh;
-    position: relative;
-  }
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Merry Christmas</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;600;700;800&display=swap');
 
-  .slideshow__slide {
-    position: relative;
-    display: block;
-    vertical-align: middle;
-    background: whitesmoke;
-    color: black;
-    height: 100vh;
-  }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-  .slideshow__slide-content {
-    transform: translateY(-50%);
-    top: 50%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    display: inline-block;
-    margin: 0 auto;
-  }
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(bg.jpg)no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 
-  .is-slideshow-grid .slideshow__slide-content {
-    width: 100%;
-    max-width: 800px;
-  }
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: 750px;
+  perspective: 1200px;
+}
 
-  .slideshow__actions {
-    padding: 1.6rem 0;
-    text-align: center;
-    display: block;
-    margin: 0 auto;
-    border-top: 1px solid orangered;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
+.card{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  height: 600px;
+  transform-style: preserve-3d;
+}
 
-  .slideshow__slide {
-    transition: height .2s ease-in-out;
-    overflow: hidden;
-  }
+.card .card-bg{
+  position: absolute;
+}
 
-  .slideshow__slide:not(.is-active) {
-    height: 0;
-    pointer-events: none;
-  }
+.card .card-bg img{
+  z-index: 1;
+  width: 100%;
+  border-radius: 10px;
+}
 
-  .is-active ~ .slideshow__slide:not(.is-active) {
-  }
+.card .title{
+  color: plum;
+  z-index: 2;
+  position: absolute;
+  top: 50px;
+  text-align: center;
+  line-height: 40px;
+  transition: all 0.3s ease-out;
+}
 
-  .slideshow__next {
-    cursor: pointer;
-  }
+.card .title h2{
+  font-family: "Eczar", serif;
+  font-size: 25px;
+  text-transform: uppercase;
+}
 
-  .slideshow__slide.is-active + .slideshow__actions .slideshow__next,
-  .slideshow__slide:not(.is-active) + .slideshow__actions .slideshow__done {
-    display: none;
-  }
-</style>
+.card .title h1{
+  font-family: "Berkshire Swash", cursive;
+  font-size: 60px;
+  letter-spacing: 2px;
+}
 
-<div role="list" class="slideshow is-slideshow-y is-slideshow-grid">
-    <div role="listitem" class="slideshow__slide">
-        <div class="slideshow__slide-content">
-            <img src="https://scontent.fhan2-1.fna.fbcdn.net/v/t1.0-9/127278874_1511522369042610_1532770149690056467_n.jpg?_nc_cat=102&ccb=2&_nc_sid=8bfeb9&_nc_ohc=-MvVXJ4qkYYAX9wFGiC&_nc_ht=scontent.fhan2-1.fna&oh=80c7be393fe25e9bb20a3c15de6dc3ca&oe=60099E13" alt="">
+.card .title h3{
+  font-family: "Eczar", serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.card .images{
+  z-index: 2;
+}
+
+.card .images .santa{
+  z-index: 3;
+  position: absolute;
+  width: 400px;
+  transition: all 0.3s ease-out;
+}
+
+.card .images .tree{
+  z-index: 2;
+  width: 400px;
+  transition: all 0.3s ease-out;
+}
+                           
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-bg">
+          <img src="card-bg.jpg" alt="">
         </div>
-    </div>
-    <div role="listitem" class="slideshow__slide">
-        <div class="slideshow__slide-content">
-          <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/110317046_1403654356496079_5508841685436492637_n.jpg?_nc_cat=104&ccb=2&_nc_sid=0debeb&_nc_ohc=m_-uVkRYIzQAX9v1yxJ&_nc_ht=scontent.fhan2-4.fna&oh=eb9ef21a4afdaeb3b557d99cb70dbaa4&oe=6007F923" alt="">
+        <div class="title">
+          <h2>Merry</h2>
+          <h1>Christmas</h1>
+          <h3>& Happy New Year</h3>
         </div>
-    </div>
-    <div role="listitem" class="slideshow__slide">
-        <div class="slideshow__slide-content">
-          <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/109934325_1403653806496134_3124303654360536326_n.jpg?_nc_cat=104&ccb=2&_nc_sid=0debeb&_nc_ohc=_8CepSV1TpkAX8YHkBg&_nc_ht=scontent.fhan2-4.fna&oh=d0030539742f7a5af0c26d2d515ac415&oe=6009D9AD" alt="">
+        <div class="images">
+          <img src="santa.png" class="santa" alt="">
+          <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/110113420_1400315196829995_8937363293921114405_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=AhPuLFRG66kAX-dxkwN&_nc_ht=scontent.fhan2-3.fna&oh=ab5af8bb7340d1c151f44a0df0a95d9c&oe=6009DA74" class="tree" alt="">
         </div>
+      </div>
     </div>
-    <div role="listitem" class="slideshow__slide">
-        <div class="slideshow__slide-content">
-          <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/109703554_1403653766496138_3197659583646559077_n.jpg?_nc_cat=110&ccb=2&_nc_sid=0debeb&_nc_ohc=7Y517M6Ab1UAX9nGRl5&_nc_ht=scontent.fhan2-4.fna&oh=c07d9ad4b66acebf73d3b76b9f35cdc8&oe=6008891F" alt="">
-        </div>
-    </div>
-    <div role="listitem" class="slideshow__slide">
-        <div class="slideshow__slide-content">
-          <img src="https://scontent.fhan2-6.fna.fbcdn.net/v/t1.0-9/116585330_1403653289829519_2184793499439337486_n.jpg?_nc_cat=100&ccb=2&_nc_sid=0debeb&_nc_ohc=QZ-MIwipXwoAX8tJZfh&_nc_ht=scontent.fhan2-6.fna&oh=6803d9c81a7d3cb87c299f4f4f371440&oe=6007E04B" alt="">
-        </div>
-    </div>
-    <nav class="slideshow__actions">
-      <a class="slideshow__next" role="button">next</a>
-      <a class="slideshow__done" role="button">done</a>
-    </nav>
-</div>
 
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
-<script>
-  $(function() {
-    var $slides = $('.slideshow__slide');
-    var $slideshow = $slides.closest('.slideshow');
-    init();
+    <script type="text/javascript">
+    const container = document.querySelector(".container");
+    const card = document.querySelector(".card");
+    const title = document.querySelector(".title");
+    const santa = document.querySelector(".santa");
+    const tree = document.querySelector(".tree");
 
-    function init() {
-      $slides.hasClass('is-active') || $slides.first().addClass('is-active');
-    }
+    //card rotate on mouse move
+    container.addEventListener("mousemove", (rotate) => {
+      let x = (innerWidth / 2 - rotate.pageX) / 15;
+      let y = (innerHeight / 2 - rotate.pageY) / 15;
 
-    function wheel(delta) {
-      if (delta > 99) go(1);
-      if (delta < -99) go(-1);
-    }
-
-    function go(n) {
-      var $active = $slides.filter('.is-active');
-      var curr = $slides.index($active);
-      var hasActive = curr != -1;
-      var next = hasActive ? curr + n : 0;
-      if (next < 0) next = 0;
-      else if (next >= $slides.length) next = -1;
-      var $next = $slides.eq(next);
-      if (hasActive) $active.not($next).removeClass('is-active');
-      $next.addClass('is-active');
-    }
-
-    function isScroll(e, key) {
-      if (key === 40 || key === 38) return e.scrollHeight > e.clientHeight;
-      if (key === 39 || key === 37) return e.scrollWidth > e.clientWidth;
-    }
-
-    $(window).on('DOMMouseScroll mousewheel wheel', _.debounce(function(e) {
-      wheel(e.originalEvent.deltaY);
-    }, 200, {
-      leading: true,
-      trailing: false
-    })).on('keydown', function(e) {
-      var key = e.keyCode;
-      if (key < 37 || key > 40) return;
-      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-      if (isScroll(document.documentElement, key)) return;
-      e.preventDefault();
-      if (key === 40 || key === 39) go(1);
-      if (key === 38 || key === 37) go(-1);
+      card.style.transform = "rotateY(" + x + "deg) rotateX(" + y + "deg)";
     });
 
-    $slideshow.find('.slideshow__next').on('click', function() {
-      go(1);
+    //card effects on mouse over the card
+    container.addEventListener("mouseover", () => {
+      title.style.transform = "translate3d(0, 0, 160px)";
+      santa.style.transform = "translate3d(0, 0, 220px)";
+      tree.style.transform = "translate3d(0, 0, 120px)";
+      card.style.transition = "all 0.1s ease";
     });
-  });
-</script>
+
+    //card back to normal when mouse out
+    container.addEventListener("mouseout", () => {
+      card.style.transform = "rotateY(0deg) rotateX(0deg)";
+      card.style.transition = "all 0.5s ease";
+      title.style.transform = "translate3d(0, 0, 0)";
+      santa.style.transform = "translate3d(0, 0, 0)";
+      tree.style.transform = "translate3d(0, 0, 0)";
+    });
+    </script>
+
+  </body>
+</html>
